@@ -61,20 +61,35 @@ const App: React.FC = () => {
   const [isSearchingSubtitles, setIsSearchingSubtitles] = useState(false);
 
   useEffect(() => {
+    console.log('App component mounted');
+    
     // Check CLI status on startup
-    window.api.send('status', {});
+    try {
+      console.log('Sending status command...');
+      window.api.send('status', {});
+    } catch (err) {
+      console.error('Failed to send status command:', err);
+      setError({
+        message: 'Failed to communicate with backend',
+        details: err
+      });
+      setIsLoading(false);
+    }
     
     const handleStatus = (response: CliStatus) => {
+      console.log('Status response received:', response);
       setStatus(response);
       setIsLoading(false);
       setError(undefined);
     };
 
     const handleError = (err: StatusError) => {
+      console.error('Error received:', err);
       setError(err);
       setIsLoading(false);
     };
 
+    // Set up listeners
     window.api.receive('status-result', handleStatus);
     window.api.receive('status-error', handleError);
     window.api.receive('scan-error', handleError);
@@ -146,7 +161,36 @@ const App: React.FC = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        fontSize: '18px',
+        backgroundColor: '#f0f0f0'
+      }}>
+        Loading Media Manager...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{ 
+        padding: '20px',
+        color: '#ff4444',
+        backgroundColor: '#ffeeee',
+        border: '1px solid #ffcccc',
+        margin: '20px',
+        borderRadius: '4px'
+      }}>
+        <h3>Error</h3>
+        <p>{error.message}</p>
+        <pre>{JSON.stringify(error.details, null, 2)}</pre>
+        <button onClick={() => setError(undefined)}>Dismiss</button>
+      </div>
+    );
   }
 
   return (

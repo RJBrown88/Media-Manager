@@ -2,15 +2,22 @@ import { ipcMain } from 'electron';
 import { spawn } from 'child_process';
 import * as path from 'path';
 import isDev from 'electron-is-dev';
+import * as fs from 'fs';
 
 // Note: Subtitle API-related IPC handlers have been removed in the simplified version
 
 // Get the path to the CLI executable
 const getCliPath = () => {
+  const isWindows = process.platform === 'win32';
+  const executableName = isWindows ? 'media_manager_cli.exe' : 'media_manager_cli';
+  
   if (isDev) {
-    return path.join(process.cwd(), 'target/debug/media_manager_cli.exe');
+    // In development, use the release build (since that's what we actually build)
+    return path.join(process.cwd(), 'target', 'release', executableName);
   }
-  return path.join(process.resourcesPath, 'bin/media_manager_cli.exe');
+  
+  // In production, use the release build from resources
+  return path.join(process.resourcesPath, 'bin', executableName);
 };
 
 // Execute CLI command and return JSON response

@@ -17,7 +17,7 @@ module.exports = {
   },
   mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
   entry: './src/renderer/index.tsx',
-  target: 'electron-renderer',
+  target: 'web',
   devtool: 'source-map',
   module: {
     rules: [
@@ -28,24 +28,6 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              modules: {
-                auto: true,
-                localIdentName: '[name]__[local]--[hash:base64:5]'
-              }
-            }
-          }
-        ]
-      },
-      {
-        test: /\.css$/,
-        include: /node_modules/,
         use: ['style-loader', 'css-loader']
       },
       {
@@ -63,8 +45,8 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    chunkFilename: '[name].chunk.js',
-    path: path.resolve(__dirname, 'dist/renderer')
+    path: path.resolve(__dirname, 'dist/renderer'),
+    publicPath: '/'
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -75,8 +57,6 @@ module.exports = {
     })
   ],
   optimization: {
-    splitChunks: {
-      chunks: 'all'
-    }
+    splitChunks: false
   }
 };
