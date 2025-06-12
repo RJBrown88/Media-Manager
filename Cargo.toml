@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "media_manager_core",
+    "media_manager_cli",
+]
+resolver = "2" # Recommended for workspaces

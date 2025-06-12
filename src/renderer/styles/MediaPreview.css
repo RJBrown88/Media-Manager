@@ -1,0 +1,315 @@
+.media-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  background-color: #000000;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Override video.js default styles */
+.video-js {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.video-js .vjs-big-play-button {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.metadata-panel {
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.metadata-panel h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.metadata-panel table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.metadata-panel td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.metadata-panel td:first-child {
+  width: 120px;
+  color: #666;
+  font-weight: 500;
+}
+
+.file-path {
+  word-break: break-all;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+/* Enhanced Subtitle Info */
+.subtitle-info {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.subtitle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.subtitle-header h3 {
+  margin: 0;
+}
+
+.find-subtitles-button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.find-subtitles-button:hover {
+  background-color: #0056b3;
+}
+
+.subtitle-streams {
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+}
+
+.subtitle-count {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.subtitle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.subtitle-stream-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border-left: 3px solid #007bff;
+}
+
+.subtitle-stream-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.subtitle-language {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.subtitle-codec {
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+}
+
+.subtitle-stream-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  text-align: right;
+}
+
+.subtitle-index {
+  font-size: 0.8rem;
+  color: #888;
+  background-color: #e9ecef;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+
+.subtitle-title {
+  font-size: 0.8rem;
+  color: #666;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.no-subtitles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border: 2px dashed #dee2e6;
+  text-align: center;
+}
+
+.no-subtitles-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.5;
+}
+
+.no-subtitles-text {
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.no-subtitles-help {
+  font-size: 0.9rem;
+  color: #888;
+  max-width: 300px;
+  line-height: 1.4;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .media-preview {
+    background-color: #2d2d2d;
+  }
+
+  .metadata-panel {
+    background-color: #1a1a1a;
+  }
+
+  .metadata-panel h3 {
+    color: #ffffff;
+  }
+
+  .metadata-panel td {
+    border-color: #404040;
+  }
+
+  .metadata-panel td:first-child {
+    color: #999;
+  }
+
+  .subtitle-info {
+    border-top-color: #404040;
+  }
+
+  .subtitle-streams {
+    background-color: #2d2d2d;
+    border-color: #404040;
+  }
+
+  .subtitle-count {
+    color: #e0e0e0;
+    border-bottom-color: #404040;
+  }
+
+  .subtitle-stream-item {
+    background-color: #1a1a1a;
+    border-left-color: #007bff;
+  }
+
+  .subtitle-language {
+    color: #e0e0e0;
+  }
+
+  .subtitle-codec {
+    color: #999;
+  }
+
+  .subtitle-index {
+    background-color: #404040;
+    color: #ccc;
+  }
+
+  .subtitle-title {
+    color: #999;
+  }
+
+  .no-subtitles {
+    background-color: #1a1a1a;
+    border-color: #404040;
+  }
+
+  .no-subtitles-text {
+    color: #999;
+  }
+
+  .no-subtitles-help {
+    color: #666;
+  }
+
+  .video-js.vjs-theme-dark {
+    background-color: #000000;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .video-js {
+    aspect-ratio: 16 / 9;
+  }
+
+  .subtitle-stream-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .subtitle-stream-details {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-js {
+    aspect-ratio: 16 / 9;
+  }
+
+  .subtitle-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .find-subtitles-button {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
