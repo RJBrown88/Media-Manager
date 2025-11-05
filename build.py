@@ -8,7 +8,37 @@ import os
 import sys
 import shutil
 import subprocess
+import platform
 from pathlib import Path
+
+
+def check_platform():
+    """Check if running on Windows."""
+    current_platform = platform.system()
+
+    if current_platform != 'Windows':
+        print("=" * 60)
+        print("WARNING: Platform Mismatch!")
+        print("=" * 60)
+        print(f"Current platform: {current_platform}")
+        print(f"Required platform: Windows")
+        print()
+        print("PyInstaller cannot cross-compile!")
+        print("Building on non-Windows will NOT produce a Windows .exe")
+        print()
+        print("Options:")
+        print("1. Run this build on a Windows machine")
+        print("2. Use GitHub Actions (see BUILD.md)")
+        print("3. Continue anyway (will produce non-Windows binary)")
+        print("=" * 60)
+        print()
+
+        response = input("Continue anyway? (yes/no): ").lower()
+        if response not in ('yes', 'y'):
+            print("Build cancelled.")
+            return False
+
+    return True
 
 
 def clean_build_dirs():
@@ -179,6 +209,10 @@ def main():
     print("=" * 60)
     print("Video Manager - Build Script")
     print("=" * 60)
+
+    # Step 0: Check platform
+    if not check_platform():
+        return 1
 
     # Step 1: Check dependencies
     if not check_dependencies():

@@ -19,7 +19,7 @@ a = Analysis(
         'PyQt5.QtWidgets',
         'PyQt5.QtMultimedia',
         'PyQt5.QtMultimediaWidgets',
-        'PIL._tkinter_finder',
+        'PyQt5.sip',
         'video_manager.core',
         'video_manager.ui',
         'video_manager.utils',
