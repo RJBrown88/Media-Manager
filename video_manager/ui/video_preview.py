@@ -29,6 +29,9 @@ class VideoPreviewWidget(QWidget):
         self.current_file = None
         self.init_ui()
 
+        # Diagnostic: Check available media services
+        self._check_media_services()
+
     def init_ui(self) -> None:
         """Initialize UI components."""
         layout = QVBoxLayout()
@@ -178,8 +181,30 @@ class VideoPreviewWidget(QWidget):
             error: Error code
         """
         error_string = self.media_player.errorString()
-        self.status_label.setText(f"Error: {error_string}")
-        self.errorOccurred.emit(error_string)
+
+        # Map error codes to descriptions
+        error_messages = {
+            QMediaPlayer.NoError: "No error",
+            QMediaPlayer.ResourceError: "Resource error - file cannot be opened or read",
+            QMediaPlayer.FormatError: "Format error - unsupported format or codec",
+            QMediaPlayer.NetworkError: "Network error",
+            QMediaPlayer.AccessDeniedError: "Access denied",
+            QMediaPlayer.ServiceMissingError: "Media service missing - Qt multimedia plugins not found",
+        }
+
+        error_desc = error_messages.get(error, f"Unknown error ({error})")
+        full_message = f"{error_desc}"
+        if error_string:
+            full_message += f": {error_string}"
+
+        self.status_label.setText(f"Error: {full_message}")
+        self.errorOccurred.emit(full_message)
+
+        # Log to console for debugging
+        print(f"QMediaPlayer Error: {error} - {error_desc}")
+        if error_string:
+            print(f"  Detail: {error_string}")
+        print(f"  File: {self.current_file}")
 
     def seek_to_keyframe(self, position: float) -> None:
         """
@@ -249,3 +274,27 @@ class VideoPreviewWidget(QWidget):
     def get_volume(self) -> int:
         """Get current volume level."""
         return self.media_player.volume()
+
+    def _check_media_services(self) -> None:
+        """
+        Diagnostic check for available media services.
+        Logs information that helps diagnose playback issues.
+        """
+        try:
+            from PyQt5.QtMultimedia import QMediaService
+            print("=== Qt Multimedia Diagnostics ===")
+            print(f"QMediaPlayer availability: {QMediaPlayer.hasSupport('video/mp4')}")
+            print(f"Media player service: {self.media_player.service() is not None}")
+
+            # Check if we're in a frozen executable
+            import sys
+            if getattr(sys, 'frozen', False):
+                print("Running as frozen executable")
+                print(f"  Executable path: {sys.executable}")
+                print(f"  _MEIPASS: {getattr(sys, '_MEIPASS', 'Not set')}")
+            else:
+                print("Running from source")
+
+            print("================================")
+        except Exception as e:
+            print(f"Error checking media services: {e}")
