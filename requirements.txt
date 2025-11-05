@@ -1,0 +1,13 @@
+# PyQt5 for GUI
+PyQt5>=5.15.0
+
+# Image processing for thumbnails
+Pillow>=9.0.0
+
+# Required system tools (install separately):
+# - FFmpeg (for video metadata extraction and thumbnail generation)
+#   Download from: https://ffmpeg.org/download.html
+#   On Windows: Add ffmpeg.exe and ffprobe.exe to PATH
+
+# Optional dependencies for Windows
+# pywin32>=300  # For advanced Windows file operations (optional)
