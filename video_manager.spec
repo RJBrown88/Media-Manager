@@ -86,6 +86,7 @@ a = Analysis(
         'PyQt5.QtWidgets',
         'PyQt5.QtMultimedia',
         'PyQt5.QtMultimediaWidgets',
+        'PyQt5.QtNetwork',  # Required for network streaming (UNC paths)
         'PyQt5.sip',
         'video_manager.core',
         'video_manager.ui',
