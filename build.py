@@ -198,7 +198,7 @@ Video Manager v1.0.0
 Built with PyQt5 and Python
 """
 
-    with open(dist_dir / 'README.txt', 'w') as f:
+    with open(dist_dir / 'README.txt', 'w', encoding='utf-8') as f:
         f.write(readme_content)
 
     print(f"✓ Distribution package created in: {dist_dir}/")
