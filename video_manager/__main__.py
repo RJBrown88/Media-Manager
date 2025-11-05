@@ -15,6 +15,19 @@ from .ui import MainWindow
 
 def main():
     """Main application entry point."""
+    # Configure Qt plugin paths for frozen executable (CRITICAL for video playback)
+    if getattr(sys, 'frozen', False):
+        # PyInstaller extracts to _MEIPASS
+        bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
+        plugin_path = os.path.join(bundle_dir, 'PyQt5', 'Qt5', 'plugins')
+
+        # Tell Qt where to find plugins
+        QApplication.addLibraryPath(plugin_path)
+
+        print(f"=== Frozen Executable Mode ===")
+        print(f"Plugin path: {plugin_path}")
+        print(f"Plugin path exists: {os.path.exists(plugin_path)}")
+
     # Create Qt application
     app = QApplication(sys.argv)
     app.setApplicationName("Video Manager")
