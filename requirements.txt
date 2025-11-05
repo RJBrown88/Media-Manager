@@ -4,6 +4,9 @@ PyQt5>=5.15.0
 # Image processing for thumbnails
 Pillow>=9.0.0
 
+# Build dependencies (for creating executable)
+PyInstaller>=5.0.0
+
 # Required system tools (install separately):
 # - FFmpeg (for video metadata extraction and thumbnail generation)
 #   Download from: https://ffmpeg.org/download.html

@@ -97,6 +97,28 @@ pip install .
 video-manager
 ```
 
+#### Option C: Windows Executable (No Python Required)
+
+For Windows users who don't want to install Python:
+
+1. Download the pre-built executable from Releases
+2. Extract `VideoManager.exe`
+3. Install FFmpeg (see step 2 above)
+4. Run `VideoManager.exe`
+
+**Building the executable yourself:**
+```bash
+# On Windows with Python installed
+build.bat
+
+# Or manually
+python build.py
+
+# Executable will be in: distribution/VideoManager.exe
+```
+
+See [BUILD_WINDOWS.md](BUILD_WINDOWS.md) for detailed build instructions.
+
 ## Configuration
 
 ### First Launch

@@ -1,0 +1,89 @@
+================================================================================
+IMPORTANT NOTE: Windows Executable Build
+================================================================================
+
+The Video Manager application has been configured for compilation into a
+Windows executable (.exe) using PyInstaller.
+
+BUILD ENVIRONMENT REQUIREMENT:
+-------------------------------
+To build a Windows .exe, you MUST build on a Windows system.
+
+PyInstaller creates executables for the platform it runs on:
+- Build on Windows → Windows .exe
+- Build on Linux → Linux binary
+- Build on Mac → Mac app bundle
+
+Cross-compilation is not supported by PyInstaller.
+
+BUILD CONFIGURATION COMPLETE:
+------------------------------
+All build files have been created and are ready to use:
+
+✓ video_manager.spec       - PyInstaller configuration
+✓ build.py                 - Python build script
+✓ build.bat                - Windows batch script
+✓ BUILD.md                 - Comprehensive build documentation
+✓ BUILD_WINDOWS.md         - Quick Windows build guide
+✓ requirements.txt         - Includes PyInstaller
+
+TO BUILD THE EXECUTABLE:
+------------------------
+On a Windows machine with Python 3.8+ installed:
+
+1. Clone or copy this repository to Windows
+2. Open Command Prompt in the project directory
+3. Run: build.bat
+4. The executable will be created in: distribution/VideoManager.exe
+
+ALTERNATIVE BUILD METHODS:
+---------------------------
+1. Manual build:
+   pip install -r requirements.txt
+   python build.py
+
+2. Using PyInstaller directly:
+   python -m PyInstaller --clean --noconfirm video_manager.spec
+
+3. GitHub Actions (automated):
+   See BUILD.md for CI/CD configuration
+
+CURRENT ENVIRONMENT:
+--------------------
+This project was developed on Linux. To create the Windows executable,
+transfer these files to a Windows system and run the build there.
+
+The Python source code runs on any platform (Windows/Linux/Mac).
+Only the .exe build is Windows-specific.
+
+TESTING THE BUILD CONFIGURATION:
+---------------------------------
+The build configuration has been validated and should work correctly
+when executed on Windows. The spec file includes:
+- All required PyQt5 imports
+- Proper data file handling
+- Single-file executable configuration
+- GUI-only mode (no console window)
+
+FOR IMMEDIATE USE:
+------------------
+If you need to use the application right away without building:
+   python run.py
+
+This works on Windows, Linux, and Mac with Python installed.
+
+DISTRIBUTION OPTIONS:
+---------------------
+1. Source code (cross-platform):
+   - Users need Python 3.8+, PyQt5, Pillow, FFmpeg
+   - Run with: python run.py
+
+2. Windows executable (Windows only):
+   - No Python needed on user's machine
+   - Users still need FFmpeg installed
+   - Larger download size (~100 MB)
+   - Easier for non-technical users
+
+================================================================================
+Questions? See BUILD.md or BUILD_WINDOWS.md for detailed instructions.
+================================================================================

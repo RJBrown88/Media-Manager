@@ -118,5 +118,35 @@ jspm_packages/
 tmp/
 temp/
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# PyInstaller
+build/
+dist/
+distribution/
+*.spec.bak
+*.manifest
+*.spec~
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
 # Application specific
-.media_manager/ 
+.media_manager/
+*.db
+*.db-wal
+*.db-shm 
