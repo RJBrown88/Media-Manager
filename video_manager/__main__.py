@@ -4,6 +4,7 @@ Main entry point for Video Manager application.
 
 import sys
 import os
+import multiprocessing
 from PyQt5.QtWidgets import QApplication
 
 from .core import (
@@ -15,6 +16,9 @@ from .ui import MainWindow
 
 def main():
     """Main application entry point."""
+    # Note: multiprocessing.freeze_support() is called in run.py
+    # before this function is invoked.
+
     # Create Qt application
     app = QApplication(sys.argv)
     app.setApplicationName("Video Manager")
@@ -62,5 +66,8 @@ def main():
     sys.exit(exit_code)
 
 
-if __name__ == '__main__':
-    main()
+# REMOVED: if __name__ == '__main__': block
+# Reason: In frozen apps (PyInstaller), this module's __name__ can be '__main__'
+# causing it to execute during import, leading to infinite spawn loop.
+# This module should ONLY be called from run.py, never executed directly.
+
