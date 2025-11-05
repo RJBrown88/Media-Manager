@@ -127,6 +127,7 @@ exe = EXE(
     upx_exclude=[],
     runtime_tmpdir=None,
     console=False,  # No console window (GUI only)
+                    # Note: To see diagnostic output, run from cmd: VideoManager.exe
     disable_windowed_traceback=False,
     target_arch=None,
     codesign_identity=None,

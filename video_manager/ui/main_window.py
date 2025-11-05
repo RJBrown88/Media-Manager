@@ -166,6 +166,7 @@ class MainWindow(QMainWindow):
 
         # Video preview
         self.preview_widget = VideoPreviewWidget()
+        self.preview_widget.errorOccurred.connect(self.on_preview_error)
         right_splitter.addWidget(self.preview_widget)
 
         # Metadata panel
@@ -387,6 +388,59 @@ class MainWindow(QMainWindow):
         file_data = self.file_model.get_file_at_row(index.row())
         if file_data:
             self.preview_widget.load_video(file_data['path'])
+
+    def on_preview_error(self, error_message: str) -> None:
+        """
+        Handle video preview errors (codec issues, format not supported).
+        Offers fallback to external player to complete workflow.
+        """
+        import subprocess
+        import platform
+
+        # Get current file being previewed
+        current_file = self.preview_widget.current_file
+        if not current_file:
+            return
+
+        # Build user-friendly error message
+        msg = (
+            f"Video preview failed:\n\n{error_message}\n\n"
+            "This usually means:\n"
+            "• Video codec not supported by Windows Media Foundation\n"
+            "• Missing system codecs (H.265/HEVC, MKV, etc.)\n\n"
+            "Would you like to open this video in an external player\n"
+            "to verify its contents?"
+        )
+
+        reply = QMessageBox.question(
+            self,
+            "Preview Failed - External Player?",
+            msg,
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.Yes
+        )
+
+        if reply == QMessageBox.Yes:
+            # Try to open with default system player
+            try:
+                if platform.system() == 'Windows':
+                    os.startfile(current_file)
+                elif platform.system() == 'Darwin':  # macOS
+                    subprocess.Popen(['open', current_file])
+                else:  # Linux
+                    subprocess.Popen(['xdg-open', current_file])
+
+                self.status_bar.showMessage(
+                    f"Opened in external player: {os.path.basename(current_file)}",
+                    5000
+                )
+            except Exception as e:
+                QMessageBox.critical(
+                    self,
+                    "Error",
+                    f"Could not open external player:\n{e}\n\n"
+                    "Please install VLC or another video player."
+                )
 
     def rename_selected(self) -> None:
         """Rename selected file."""
