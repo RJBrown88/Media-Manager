@@ -1,0 +1,7 @@
+Requirement already satisfied: PyInstaller in c:\users\rjbro.dpsation\appdata\local\python\pythoncore-3.14-64\lib\site-packages (6.16.0)
+Requirement already satisfied: altgraph in c:\users\rjbro.dpsation\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from PyInstaller) (0.17.4)
+Requirement already satisfied: packaging>=22.0 in c:\users\rjbro.dpsation\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from PyInstaller) (25.0)
+Requirement already satisfied: pefile!=2024.8.26,>=2022.5.30 in c:\users\rjbro.dpsation\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from PyInstaller) (2023.2.7)
+Requirement already satisfied: pyinstaller-hooks-contrib>=2025.8 in c:\users\rjbro.dpsation\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from PyInstaller) (2025.9)
+Requirement already satisfied: pywin32-ctypes>=0.2.1 in c:\users\rjbro.dpsation\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from PyInstaller) (0.2.3)
+Requirement already satisfied: setuptools>=42.0.0 in c:\users\rjbro.dpsation\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from PyInstaller) (80.9.0)
