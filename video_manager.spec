@@ -124,7 +124,16 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    upx_exclude=[],
+    upx_exclude=[
+        'qwindows.dll',
+        'dsengine.dll',
+        'wmfengine.dll',
+        'qtmedia_audioengine.dll',
+        'qtaudio_windows.dll',
+        'Qt5Multimedia.dll',
+        'Qt5MultimediaWidgets.dll',
+        'Qt5Network.dll',
+    ],
     runtime_tmpdir=None,
     console=False,  # No console window (GUI only)
                     # Note: To see diagnostic output, run from cmd: VideoManager.exe
