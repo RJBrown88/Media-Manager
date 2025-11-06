@@ -135,8 +135,8 @@ exe = EXE(
         'Qt5Network.dll',
     ],
     runtime_tmpdir=None,
-    console=False,  # No console window (GUI only)
-                    # Note: To see diagnostic output, run from cmd: VideoManager.exe
+    console=True,  # EMERGENCY: Enable console to see crash diagnostics
+                   # TODO: Set back to False after fixing crash
     disable_windowed_traceback=False,
     target_arch=None,
     codesign_identity=None,

@@ -16,17 +16,29 @@ from .ui import MainWindow
 def main():
     """Main application entry point."""
     # Configure Qt plugin paths for frozen executable (CRITICAL for video playback)
-    if getattr(sys, 'frozen', False):
-        # PyInstaller extracts to _MEIPASS
-        bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
-        plugin_path = os.path.join(bundle_dir, 'PyQt5', 'Qt5', 'plugins')
+    # EMERGENCY: Wrapped in try/except to diagnose crash
+    try:
+        if getattr(sys, 'frozen', False):
+            # PyInstaller extracts to _MEIPASS
+            bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
+            plugin_path = os.path.join(bundle_dir, 'PyQt5', 'Qt5', 'plugins')
 
-        # Tell Qt where to find plugins
-        QApplication.addLibraryPath(plugin_path)
+            print(f"=== Frozen Executable Mode ===")
+            print(f"Bundle dir: {bundle_dir}")
+            print(f"Plugin path: {plugin_path}")
+            print(f"Plugin path exists: {os.path.exists(plugin_path)}")
 
-        print(f"=== Frozen Executable Mode ===")
-        print(f"Plugin path: {plugin_path}")
-        print(f"Plugin path exists: {os.path.exists(plugin_path)}")
+            if os.path.exists(plugin_path):
+                # Tell Qt where to find plugins
+                print(f"Calling QApplication.addLibraryPath...")
+                QApplication.addLibraryPath(plugin_path)
+                print(f"✓ Plugin path added successfully")
+            else:
+                print(f"⚠ WARNING: Plugin path does not exist - skipping")
+    except Exception as e:
+        print(f"ERROR in plugin configuration: {e}")
+        import traceback
+        traceback.print_exc()
 
     # Create Qt application
     app = QApplication(sys.argv)
