@@ -68,11 +68,15 @@ def check_dependencies():
         subprocess.run([sys.executable, '-m', 'pip', 'install', 'PyInstaller>=5.0.0'])
 
     try:
-        import PyQt5
-        print(f"✓ PyQt5 {PyQt5.Qt.PYQT_VERSION_STR}")
+        from PyQt5.QtCore import PYQT_VERSION_STR
+        print(f"✓ PyQt5 {PYQT_VERSION_STR}")
     except ImportError:
         print("✗ PyQt5 not found. Please install requirements.txt")
         return False
+    except AttributeError:
+        # Fallback if version string not available
+        print("✓ PyQt5 (version unknown)")
+        pass
 
     try:
         import PIL
@@ -194,7 +198,7 @@ Video Manager v1.0.0
 Built with PyQt5 and Python
 """
 
-    with open(dist_dir / 'README.txt', 'w') as f:
+    with open(dist_dir / 'README.txt', 'w', encoding='utf-8') as f:
         f.write(readme_content)
 
     print(f"✓ Distribution package created in: {dist_dir}/")
